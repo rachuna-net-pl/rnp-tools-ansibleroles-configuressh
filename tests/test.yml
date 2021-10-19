@@ -11,9 +11,17 @@
     - name: Test settings port
       shell: cat /etc/ssh/sshd_config |grep "Port 22"
       register: settings_port
+      changed_when: false
       failed_when: settings_port.stdout == ""
     
     - name: Test settings passwordAuthentication
       shell: cat /etc/ssh/sshd_config |grep "PasswordAuthentication no"
       register: settings_passwordAuthentication
+      changed_when: false
       failed_when: settings_passwordAuthentication.stdout == ""
+
+    - name: Test settings permitRootLogin
+      shell: cat /etc/ssh/sshd_config |grep "PermitRootLogin no"
+      register: settings_permitRootLogin
+      changed_when: false
+      failed_when: settings_permitRootLogin.stdout == ""
