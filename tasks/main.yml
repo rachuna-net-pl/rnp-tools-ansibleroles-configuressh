@@ -31,3 +31,11 @@
     line: "PasswordAuthentication {{ input_role_ssh_configuration.passwordAuthentication }}" 
     state: present
   # notify: Restart sshd
+
+- name: "Block login as root"
+  lineinfile:
+    dest: "{{ vars_sshd_config_path }}" 
+    regexp: '^(#PermitRootLogin|PermitRootLogin)'
+    line: "PermitRootLogin {{ input_role_ssh_configuration.permitRootLogin }}" 
+    state: present
+  # notify: Restart sshd
