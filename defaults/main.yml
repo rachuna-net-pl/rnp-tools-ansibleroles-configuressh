@@ -2,3 +2,4 @@ input_role_os_distribution: Ubuntu
 
 input_role_ssh_configuration:
     port: 22
+    passwordAuthentication: "no"
