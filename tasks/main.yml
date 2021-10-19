@@ -1,0 +1,41 @@
+- name: "[Ubuntu] Install ssh"
+  apt:
+    name: "ssh"
+    state: present
+  when: input_role_os_distribution == "Ubuntu"
+
+- name: "[CentOS] Install ssh"
+  yum:
+    name: [ 'openssh-server', 'openssh-clients']
+    state: present
+  when: input_role_os_distribution == "CentOS"
+
+- name: "[RedHat] Install ssh"
+  yum:
+    name: [ 'openssh-server', 'openssh-clients']
+    state: present
+  when: input_role_os_distribution == "RedHat"
+
+- name: "Set SSH Port"
+  lineinfile:
+    dest: "{{ vars_sshd_config_path }}" 
+    regexp: '^(#Port|Port)'
+    line: "Port {{ input_role_ssh_configuration.port }}" 
+    state: present
+  notify: Restart sshd
+
+- name: "Block Password Authentication ssh"
+  lineinfile:
+    dest: "{{ vars_sshd_config_path }}" 
+    regexp: '^(#PasswordAuthentication|PasswordAuthentication)'
+    line: "PasswordAuthentication {{ input_role_ssh_configuration.passwordAuthentication }}" 
+    state: present
+  notify: Restart sshd
+
+- name: "Block login as root"
+  lineinfile:
+    dest: "{{ vars_sshd_config_path }}" 
+    regexp: '^(#PermitRootLogin|PermitRootLogin)'
+    line: "PermitRootLogin {{ input_role_ssh_configuration.permitRootLogin }}" 
+    state: present
+  notify: Restart sshd
