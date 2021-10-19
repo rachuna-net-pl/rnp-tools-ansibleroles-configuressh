@@ -22,7 +22,7 @@
     regexp: '^(#Port|Port)'
     line: "Port {{ input_role_ssh_configuration.port }}" 
     state: present
-  # notify: Restart sshd
+  notify: Restart sshd
 
 - name: "Block Password Authentication ssh"
   lineinfile:
@@ -30,7 +30,7 @@
     regexp: '^(#PasswordAuthentication|PasswordAuthentication)'
     line: "PasswordAuthentication {{ input_role_ssh_configuration.passwordAuthentication }}" 
     state: present
-  # notify: Restart sshd
+  notify: Restart sshd
 
 - name: "Block login as root"
   lineinfile:
@@ -38,4 +38,4 @@
     regexp: '^(#PermitRootLogin|PermitRootLogin)'
     line: "PermitRootLogin {{ input_role_ssh_configuration.permitRootLogin }}" 
     state: present
-  # notify: Restart sshd
+  notify: Restart sshd
