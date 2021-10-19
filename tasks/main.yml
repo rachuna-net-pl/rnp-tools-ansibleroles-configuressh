@@ -1,2 +1,20 @@
 ---
-# tasks file for .
+- debug:
+    msg: "{{ input_role_os_distribution }}"
+- name: "[Ubuntu] Install ssh"
+  apt:
+    name: "ssh"
+    state: present
+  when: input_role_os_distribution == "Ubuntu"
+
+- name: "[CentOS] Install ssh"
+  yum:
+    name: [ 'openssh-server', 'openssh-clients']
+    state: present
+  when: input_role_os_distribution == "CentOS"
+
+- name: "[RedHat] Install ssh"
+  yum:
+    name: [ 'openssh-server', 'openssh-clients']
+    state: present
+  when: input_role_os_distribution == "RedHat"
