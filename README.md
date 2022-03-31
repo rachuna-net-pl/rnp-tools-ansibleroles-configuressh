@@ -3,7 +3,10 @@ rnp-tools-ansibleroles-configuressh
 
 Configuration SSH roles
 
+[Changelog](CHANGELOG.md)
+
 ![Overwiew](https://gitlab.com/rachuna-net.pl/tools/ansibleroles/rnp-tools-ansibleroles-configuressh/-/raw/master/docs/configurationSSH.png)
+
 
 Role Variables
 --------------
